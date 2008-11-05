@@ -1,0 +1,12 @@
+<%
+  img_src = feature.respond_to?(:picture) ? image_tag(feature.picture, :alt => "#{feature.name rescue ''} Picture") : ''
+-%>
+
+<div class="feature urn-<%= feature.urn %>">
+  <a href="<%=h feature.url %>">
+    <div class="img"><%=image_tag feature.picture if feature.respond_to?(:picture) %></div>
+    <div class="name"><%=h feature.name rescue 'unknown' %></div>
+    <div class="description"><%=h feature.description  rescue 'unknown' %></div>
+    <div class="clearfix">&nbsp;</div>
+  </a>
+</div>

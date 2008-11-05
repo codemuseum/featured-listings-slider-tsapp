@@ -1,0 +1,5 @@
+
+.app-featured-listings-slider .controls a {cursor:move;}
+
+.app-featured-listings-slider .datapath {text-align:right; margin:10px;}
+.app-featured-listings-slider a.button { cursor:pointer; border:1px solid #aaa; -moz-border-radius: 5px; -webkit-border-radius: 5px; padding:2px 5px; }

@@ -1,0 +1,17 @@
+<% stylesheets 'featured-listings-slider' -%>
+<% javascripts 'mootools', 'mootools-fx-scroll', 'featured-listings-slider' -%>
+
+<div class="box">
+  <div class="screen">
+    <div class="stage">
+      <div class="features">
+        <%= render :partial => @page_object.features %>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <% @page_object.features.each_with_index do |feature, index| %>
+      <%= render :partial => 'features/control', :locals => {:index => index, :showing => (index == 0) } %>
+    <% end %>
+  </div>
+</div>

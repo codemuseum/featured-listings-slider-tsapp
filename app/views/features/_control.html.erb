@@ -1,0 +1,6 @@
+<%# Takes index, otherwise sets it to _INDEX_ .  Also takes :showing, optionally, if this control should be marked as showing Also takes sortable, optionally, if this control should say its draggable -%>
+<% drag_msg = local_assigns[:sortable] ? '  Click and drag to re-order.' : '' -%>
+<% showing_class = local_assigns[:showing] ? ' showing' : '' -%>
+<% index = '_INDEX_' if local_assigns[:index].nil? -%>
+<a class="control<%= showing_class %>" id="featured_listings_slider_control_<%= index %>" title="Click to view slide.<%=h drag_msg %>">&bull;</a>
+<%#   Our JS requires that the control have a unique id. -%>
