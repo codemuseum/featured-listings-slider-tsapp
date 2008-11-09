@@ -1,20 +1,24 @@
-<%# Takes f, and optionally a feature to preselect %>
-<% feature = Feature.new if local_assigns[:feature].nil? %>
+<%# Takes f, and a feature
+  # Optionally takes :stub = false to say that this should be created for the stub %>
+<% 
+  feature = Feature.new if local_assigns[:feature].nil?
+  stub = false if local_assigns[:stub].nil?
+-%>
 
 <% fields_for "#{f.object_name}[assigned_features][]", feature do |sf| -%>
-  <div class="feature" id="<%= feature.new_record? ? "new_feature__INDEX_" : "feature_#{feature.id}" %>">
+  <div class="feature urn-_URN_" id="<%= feature.new_record? ? "new_feature__INDEX_" : "feature_#{feature.id}" %>">
     <%= sf.hidden_field :position, :class => 'position-value', :index => nil %>
+    <% if feature.new_record? && feature.urn.blank? %>
+    <%= sf.hidden_field :urn, :index => nil, :value => "_URN_", :class => 'urn-value' %>
+    <% else %>
+    <%= sf.hidden_field :urn, :index => nil, :class => 'urn-value' %>
+    <% end %>
 
     <div class="ts-close-button remove">
       <a>Delete Feature</a>
     </div>
     
-    <a>
-      <div class="img"><%=image_tag feature.picture if feature.respond_to?(:picture) %></div>
-      <div class="name"><%=h feature.name rescue 'unknown' %></div>
-      <div class="description"><%=h feature.description  rescue 'unknown' %></div>
-      <div class="clearfix">&nbsp;</div>
-    </a>
-
+    <%= render :partial => 'features/link', :locals => { :feature => feature, :stub => stub } %>
+    
   </div>
 <% end -%>

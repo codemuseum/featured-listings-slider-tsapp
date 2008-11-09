@@ -2,6 +2,7 @@ class PageObjectsController < ApplicationController
   include PageObjectsControllerHelper
   before_filter :find_page_object, :only => [ :show, :edit, :update, :destroy ]
   before_filter :prepare_page_object_for_clone, :only => [ :duplicate ]
+  before_filter :find_features, :only => [:show, :edit, :update, :update_valid, :duplicate]
   
   # GET /page_objects
   # GET /page_objects.xml
@@ -85,6 +86,7 @@ class PageObjectsController < ApplicationController
   # PUT /page_objects/1
   # PUT /page_objects/1.xml
   def update
+    params[:page_object][:assigned_features] = [] if params[:page_object][:assigned_features].nil?
 
     respond_to do |format|
       if @page_object.update_attributes(params[:page_object])
@@ -109,4 +111,9 @@ class PageObjectsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+    def find_features
+      @page_object.fetch_data
+    end
 end

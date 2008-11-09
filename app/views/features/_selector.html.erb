@@ -1,0 +1,12 @@
+<div class="selector ts-selector-popdiv hidden loading">
+  <div class="close ts-close-button"><a title="Cancel selecting a new feature.">Close</a></div>
+  
+  <div class="body">
+    <div class="centered"><span class="working">Loading...</span></div>
+    <%= link_to 'source', formatted_organization_data_url(:json, @page_object.data_path, :include => [:name, :description, :url, :picture]), :class => 'source hidden' %>
+  </div>
+
+  <div class="cleared"></div>
+</div>
+
+

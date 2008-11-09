@@ -2,8 +2,11 @@
 <% javascripts 'prototype', 'effects', 'dragdrop', 'assets', 'featured-listings-slider-edit' %>
 <% 
 all_features = @page_object.features + (@page_object.added_features || [])
-all_features = [Feature.new] if all_features.size == 0 
+logger.debug "ALL FEATURES: #{all_features.inspect}"
+# all_features = [Feature.new] if all_features.size == 0 
 -%>
+
+<%= render :partial => 'features/selector' %>
 
 <% fields_for_page_object do |f| -%>
   
@@ -17,8 +20,13 @@ all_features = [Feature.new] if all_features.size == 0
     <%= f.text_field :data_path %>
   </span>
 </div>
+  
+<div class="functions">
+  <%= link_to_new_page "New #{f.object.data_path.blank? ? 'Page' : f.object.data_path.singularize.titleize}...", 
+        { :representing => f.object.data_path.blank? ? nil : f.object.data_path.singularize }, { :class => 'button new-page' } %>
+</div>
 
-<div class="box">
+<div class="box urn-<%=h @page_object.urn %>">
   <div class="screen">
     <div class="stage">
       <div class="features">
@@ -29,22 +37,22 @@ all_features = [Feature.new] if all_features.size == 0
       </div>
     </div>
   </div>
-
-  <div class="settings">
-    <%= f.label :delay, 'Show Each Feature for:' %> <%= f.text_field :delay, :size => 3, :maxlength => 3 %> <%= f.label :delay, 'seconds.' %>
-  </div>
   
   <div class="controls" id="feature-controls-<%= @page_object.urn %>"><%# Sortable.create requires the div to have an ID :( %>
     <% all_features.each_with_index do |feature, index| %>
       <%= render :partial => 'features/control', :locals => {:index => index, :sortable => true, :showing => (index == 0) }%>
     <% end %>
-    <a class="add-feature" title="Add Feature">Add Feature</a>
+    <a class="add-feature button" title="Add Feature">Add Feature</a>
   </div>
   
 </div>
   
+  
+<div class="new-feature-link-code" style="display:none">
+  <%= render(:partial => 'features/link', :locals => { :stub => true }) %>
+</div>
 <div class="new-feature-code" style="display:none">
-  <%= render(:partial => 'features/embedded_fields', :locals => {:f => f }) %>
+  <%= render(:partial => 'features/embedded_fields', :locals => {:f => f, :stub => true }) %>
 </div>
 <div class="new-feature-control-code" style="display:none">
   <%= render :partial => 'features/control', :locals => {:sortable => true} %>

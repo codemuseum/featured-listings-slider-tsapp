@@ -4,10 +4,10 @@ class CreateFeatures < ActiveRecord::Migration
       t.references :page_object
       t.string :urn
       t.integer :position
-
+    
       t.timestamps
     end
-    add_index :features, :page_object
+    add_index :features, :page_object_id
     add_index :features, :position
   end
 

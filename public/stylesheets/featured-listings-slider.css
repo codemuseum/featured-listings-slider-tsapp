@@ -1,22 +1,22 @@
-.app-featured-listings-slider .screen {width:100%; overflow:hidden;}
+.app-featured-listings-slider .box {width: 482px; margin-right: auto; margin-left: auto;}
+.app-featured-listings-slider .screen {width:100%;overflow:hidden; }
 .app-featured-listings-slider .stage {height:100%;}
-.app-featured-listings-slider .stage .features { width:10000%; height:100%; }
-.app-featured-listings-slider .features .feature { float:left; position:relative; width:1%; height:100%; }
+.app-featured-listings-slider .stage .features { width:10000%; height:100%;  }
+.app-featured-listings-slider .features .feature { float:left; /*position:relative; width:1%; height:100%;*/ }
 
 .app-featured-listings-slider .feature { position: relative; }
-
-.app-featured-listings-slider .feature { width: 482px; margin-right: auto; margin-left: auto; }
-
+.app-featured-listings-slider .feature { width: 482px;  }
 .app-featured-listings-slider .feature a { display: block; text-decoration: none; padding: 10px 12px 16px 10px; margin-bottom: 20px;}
-
 .app-featured-listings-slider .feature a .img { float: left; text-align: center; width: 100px; }
 .app-featured-listings-slider .feature a .img img { width: 100px; border:0px; }
-
 .app-featured-listings-slider .feature a .name,
 .app-featured-listings-slider .feature a .description { margin-left: 112px; }
 .app-featured-listings-slider .feature a .name { margin-top: 5px; text-decoration: underline; font-size: 130%; }
 
 .app-featured-listings-slider .clearfix {clear: both;visibility: hidden;font-size: 1px;line-height: 1px;}
+
+.app-featured-listings-slider .controls {text-align:center;}
+.app-featured-listings-slider .controls a {margin-left:4px; margin-right:4px; cursor:pointer;}
 
 
 /* fixes problems with ie HasLayout - record-link elements were peek-a-booing */

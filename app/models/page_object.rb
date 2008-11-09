@@ -3,6 +3,8 @@ class PageObject < ActiveRecord::Base
   self.caching_default = :page_update #[in :forever, :page_update, :any_page_update, 'data_update[datetimes]', :never, 'interval[5]']
 
   has_many :features, :order => :position, :dependent => :destroy
+  attr_accessor :added_features
+  
   validates_associated :features
 
   after_save :save_features
@@ -16,6 +18,14 @@ class PageObject < ActiveRecord::Base
         end
       end
     end
+  end
+  
+  def fetch_data(attrs = {})
+    data = self.organization.find_data(self.data_path, 
+      :include => [:url, :name, :description, :picture], 
+      :conditions => { :urn => features.map(&:urn).concat((added_features || []).map(&:urn)) })
+      
+    features.each { |f| f.grab_listing(data) }
   end
   
   # Responsible for removing and adding all features to this page_object. The general flow is:

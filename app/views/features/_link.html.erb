@@ -1,0 +1,18 @@
+<%# Takes a feature
+  # Optionally takes :stub = false to say that this should be created for the stub -%>
+<%
+stub = false if local_assigns[:stub].nil?
+img_src = if stub 
+    image_tag('_PICTURE_', :alt => '_NAME_')
+  elsif !feature.picture.blank?
+    image_tag(feature.picture, :alt => "#{feature.name rescue ''} Picture")
+  else
+    nil
+  end
+-%>
+<a href="<%=h stub ? '_URL_' : feature.url rescue '#' %>" class="feature-link urn-<%= stub ? '_URN_' : feature.urn %>">
+  <div class="img"><%= img_src if img_src  %></div>
+  <div class="name"><%=h stub ? '_NAME_' : feature.name rescue 'unknown' %></div>
+  <div class="description"><%=h stub ? '_DESCRIPTION_' : feature.description  rescue 'unknown' %></div>
+  <div class="clearfix">&nbsp;</div>
+</a>
