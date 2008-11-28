@@ -1,6 +1,6 @@
 class PageObject < ActiveRecord::Base
   include ThriveSmartObjectMethods
-  self.caching_default = :page_update #[in :forever, :page_update, :any_page_update, 'data_update[datetimes]', :never, 'interval[5]']
+  self.caching_default = 'interval[5]' #[in :forever, :page_update, :any_page_update, 'data_update[datetimes]', :never, 'interval[5]']
 
   has_many :features, :order => :position, :dependent => :destroy
   attr_accessor :added_features
@@ -18,6 +18,11 @@ class PageObject < ActiveRecord::Base
         end
       end
     end
+  end
+  
+  # Override caching information to be on data_update of the data path
+  def caching
+    @caching = "data_update[#{data_path}]"
   end
   
   def fetch_data(attrs = {})

@@ -6,7 +6,7 @@
 -%>
 
 <% fields_for "#{f.object_name}[assigned_features][]", feature do |sf| -%>
-  <div class="feature urn-_URN_" id="<%= feature.new_record? ? "new_feature__INDEX_" : "feature_#{feature.id}" %>">
+  <div class="feature urn-<%= feature.new_record? && feature.urn.blank? ? '_URN_' : feature.urn %>" id="<%= feature.new_record? ? "new_feature__INDEX_" : "feature_#{feature.id}" %>">
     <%= sf.hidden_field :position, :class => 'position-value', :index => nil %>
     <% if feature.new_record? && feature.urn.blank? %>
     <%= sf.hidden_field :urn, :index => nil, :value => "_URN_", :class => 'urn-value' %>

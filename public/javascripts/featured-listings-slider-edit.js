@@ -23,7 +23,7 @@ var FeaturedListingsSliderEdit = {
         this.screenEl = featuredListingsSliderBox.getElementsBySelector('div.screen')[0];
         var creationCode = this._extractCreationCode(featuredListingsSliderBox.getElementsBySelector('div.new-feature-code')[0]);
         var controlCreationCode = this._extractCreationCode(featuredListingsSliderBox.getElementsBySelector('div.new-feature-control-code')[0]);
-        this.featureLinkHtml = this._extractCreationCode(featuredListingsSliderBox.getElementsBySelector('div.new-feature-link-code')[0]);;
+        this.featureLinkHtml = this._extractCreationCode(featuredListingsSliderBox.getElementsBySelector('div.new-feature-link-code')[0]);
         this.newFeatureControl = featuredListingsSliderBox.getElementsBySelector('.add-feature')[0];
       
         var thisRef = this;
@@ -53,11 +53,7 @@ var FeaturedListingsSliderEdit = {
         this.createPopdiv(selectorEl);
       },
       // Returns creation code from element and removes element from DOM tree
-      _extractCreationCode: function(el) {
-        var creationCode = el.innerHTML;
-        el.remove();
-        return creationCode;
-      },
+      _extractCreationCode: function(el) { return el.remove().innerHTML; },
       _addFeature: function(html, controlHtml) {
         var newEl=this._featureEl(html, null);
         this.featuresEl.appendChild(newEl);
@@ -142,7 +138,7 @@ var FeaturedListingsSliderEdit = {
           
         }
         this.popdown();
-      },
+      }
     };
     
     Object.extend(showObject, TS.Fetchable);
